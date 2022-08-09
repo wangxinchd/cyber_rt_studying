@@ -8,17 +8,24 @@ Ubuntu18.04
 Terminal
 
 sudo apt-get install build-essential -y
+
 sudo apt install glibc-doc manpages-posix-dev -y
+
 sudo apt install git wget openssl libasio-dev libssl-dev -y
+
 sudo apt install libp11-dev libengine-pkcs11 softhsm2 libpoco-dev uuid-dev libncurses5-dev autoconf automake libtool -y
+
 sudo apt install mesa-common-dev -y
+
 sudo apt install libgl1-mesa-dev libglu1-mesa-dev -y
+
 
 以及安装cmake，需要高版本的cmake，请参考：
 https://blog.csdn.net/qysh123/article/details/108091590
 https://blog.csdn.net/e3399/article/details/106135560
+
 sudo apt install cmake-qt-gui -y
-```
+
 
 
 ## #2 build and install
@@ -31,6 +38,7 @@ cd cyber-rt
 ```
 
 2. build and install 
+
 （1）安装tinyxml2
 github资源：https://github.com/leethomason/tinyxml2
 依次执行如下命令：
