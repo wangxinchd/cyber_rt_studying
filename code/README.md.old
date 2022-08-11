@@ -6,7 +6,7 @@
 Ubuntu18.04
 ```
 Terminal
-
+```shell
 sudo apt-get install build-essential -y
 
 sudo apt install glibc-doc manpages-posix-dev -y
@@ -18,14 +18,14 @@ sudo apt install libp11-dev libengine-pkcs11 softhsm2 libpoco-dev uuid-dev libnc
 sudo apt install mesa-common-dev -y
 
 sudo apt install libgl1-mesa-dev libglu1-mesa-dev -y
-
+```
 
 以及安装cmake，需要高版本的cmake，请参考：
 https://blog.csdn.net/qysh123/article/details/108091590
 https://blog.csdn.net/e3399/article/details/106135560
-
+```shell
 sudo apt install cmake-qt-gui -y
-
+```
 
 
 ## #2 build and install
@@ -49,7 +49,7 @@ cd tinyxml2-6.0.0/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
 cmake --build . --target install
-
+```
 （2）安装gflags
 github资源：https://github.com/gflags/gflags
 依次执行如下命令：
@@ -60,7 +60,7 @@ cd gflags-2.2.2/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
 cmake --build . --target install
-
+```
 （3）安装gtest
 github资源：https://github.com/google/googletest
 依次执行如下命令：
@@ -71,7 +71,7 @@ cd googletest-release-1.12.1/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
 cmake --build . --target install
-
+```
 （4）安装glog
 github资源：https://github.com/google/glog
 依次执行如下命令：
@@ -82,7 +82,7 @@ cd glog-0.6.0/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
 cmake --build . --target install
-
+```
 （5）安装protobuf
 github资源：https://github.com/protocolbuffers/protobuf
 依次执行如下命令：
@@ -94,7 +94,7 @@ cd protobuf-3.14.0/
 ./configure --prefix=/home/shelman/Share/cyber-rt/code/env CFLAGS="-fPIC" CXXFLAGS="-fPIC"
 make
 make install
-
+```
 （6）安装foonathan_memory_vendor
 github资源：https://github.com/eProsima/foonathan_memory_vendor
 依次执行如下命令：
@@ -105,7 +105,7 @@ cd foonathan_memory_vendor-1.2.1/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
 cmake --build . --target install
-
+```
 （7）安装fast-cdr
 github资源：https://github.com/eProsima/Fast-CDR
 依次执行如下命令：
@@ -116,7 +116,7 @@ cd Fast-CDR-1.0.24/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env ..
 cmake --build . --target install
-
+```
 （8）安装fast-dds
 github资源：https://github.com/eProsima/Fast-DDS
 依次执行如下命令：
@@ -127,7 +127,7 @@ cd Fast-DDS-2.7.1/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DCMAKE_PREFIX_PATH=/home/shelman/Share/cyber-rt/code/env ..
 cmake --build . --target install
-
+```
 （9）安装cyber-rt
 ```shell
 cd /home/shelman/Share/cyber-rt/code/env
@@ -139,25 +139,28 @@ mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/install -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 cmake --build . --target install
-
+```
 ## #3 验证
 
+```shell
 cd /home/shelman/Share/cyber-rt/code/examples/CyberRTReadWriteTest
+```
 使用qtcreator编译CyberRTReadWriteTest.pro变成后，程序输出到bin文件下
+```shell
 cd bin
 sudo chmod +x CyberRTReadWriteTest.sh
-
+```
 运行reader
-
+```shell
 ./CyberRTReadWriteTest.sh reader
-
-![example](docs/reader.jpg)
+```
+![example](docs/reader.png)
 
 运行writer
-
+```shell
 ./CyberRTReadWriteTest.sh writer
-
-![example](docs/writer.jpg)
+```
+![example](docs/writer.png)
 
 
 
