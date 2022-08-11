@@ -54,6 +54,7 @@ bool Manager::StartDiscovery(RtpsParticipant* participant) {
   if (is_discovery_started_.exchange(true)) {
     return true;
   }
+
   if (!CreatePublisher(participant) || !CreateSubscriber(participant)) {
     AERROR << "create publisher or subscriber failed.";
     StopDiscovery();
@@ -154,6 +155,7 @@ bool Manager::CreateSubscriber(RtpsParticipant* participant) {
       !AttributesFiller::FillInSubAttr(
           channel_name_, QosProfileConf::QOS_PROFILE_TOPO_CHANGE, &sub_attr),
       false);
+
   listener_ = new SubscriberListener(
       std::bind(&Manager::OnRemoteChange, this, std::placeholders::_1));
 
@@ -192,11 +194,14 @@ void Manager::OnRemoteChange(const std::string& msg_str) {
   }
 
   ChangeMsg msg;
+  //RETURN_IF(!message::ParseFromString(msg_str, &msg));
+  if (message::HasParseFromString<ChangeMsg>::value) {
+    msg.ParseFromString(msg_str);
+  } else {
+    AWARN << "HasParseFromString<ChangeMsg> is not met.";
+    return;
+  }
 
-  // shelman
-  AINFO << "shelman 0 ret: " << msg.ParseFromString(msg_str) << ", str info: " << msg_str.c_str();
-
-  RETURN_IF(!message::ParseFromString(msg_str, &msg));
   if (IsFromSameProcess(msg)) {
     return;
   }
@@ -213,8 +218,6 @@ bool Manager::Publish(const ChangeMsg& msg) {
   apollo::cyber::transport::UnderlayMessage m;
   RETURN_VAL_IF(!message::SerializeToString(msg, &m.data()), false);
   {
-      AINFO << "shelman 1 ret: " << m.data().c_str();
-
     std::lock_guard<std::mutex> lg(lock_);
     if (publisher_ != nullptr) {
       return publisher_->write(reinterpret_cast<void*>(&m));

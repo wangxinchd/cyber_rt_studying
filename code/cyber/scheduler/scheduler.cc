@@ -53,11 +53,9 @@ bool Scheduler::CreateTask(std::function<void()>&& func,
   cr->set_id(task_id);
   cr->set_name(name);
   AINFO << "create croutine: " << name;
-
   if (!DispatchTask(cr)) {
     return false;
   }
-
   if (visitor != nullptr) {
     visitor->RegisterNotifyCallback([this, task_id]() {
       if (cyber_unlikely(stop_.load())) {

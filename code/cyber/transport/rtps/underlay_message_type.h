@@ -19,10 +19,6 @@
 
 #include "cyber/transport/rtps/underlay_message.h"
 #include "fastrtps/TopicDataType.h"
-#include "fastdds/rtps/common/SerializedPayload.h"
-
-using eprosima::fastrtps::rtps::SerializedPayload_t;
-using eprosima::fastrtps::rtps::InstanceHandle_t;
 
 namespace apollo {
 namespace cyber {
@@ -42,7 +38,7 @@ class UnderlayMessageType : public eprosima::fastrtps::TopicDataType {
   bool serialize(void* data, SerializedPayload_t* payload);
   bool deserialize(SerializedPayload_t* payload, void* data);
   std::function<uint32_t()> getSerializedSizeProvider(void* data);
-  bool getKey(void* data, InstanceHandle_t* ihandle, bool force_md5 = false);
+  bool getKey(void* data, InstanceHandle_t* ihandle);
   void* createData();
   void deleteData(void* data);
   MD5 m_md5;

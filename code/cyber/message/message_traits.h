@@ -156,14 +156,12 @@ ParseFromArray(const void* data, int size, T* message) {
 template <typename T>
 typename std::enable_if<HasParseFromString<T>::value, bool>::type
 ParseFromString(const std::string& str, T* message) {
-    AINFO << "shelman 2222222";
   return message->ParseFromString(str);
 }
 
 template <typename T>
 typename std::enable_if<!HasParseFromString<T>::value, bool>::type
 ParseFromString(const std::string& str, T* message) {
-    AINFO << "shelman 11111111";
   return false;
 }
 

@@ -280,13 +280,11 @@ bool Reader<MessageT>::Init() {
     init_.store(false);
     return false;
   }
-
   receiver_ = ReceiverManager<MessageT>::Instance()->GetReceiver(role_attr_);
   this->role_attr_.set_id(receiver_->id().HashValue());
   channel_manager_ =
       service_discovery::TopologyManager::Instance()->channel_manager();
   JoinTheTopology();
-
   return true;
 }
 

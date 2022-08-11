@@ -95,40 +95,29 @@ cd protobuf-3.14.0/
 make
 make install
 
-（6）安装foonathan_memory_vendor
-github资源：https://github.com/eProsima/foonathan_memory_vendor
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf foonathan_memory_vendor-1.2.1.tar.gz
-cd foonathan_memory_vendor-1.2.1/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
-cmake --build . --target install
-
-（7）安装fast-cdr
+（6）安装fast-cdr
 github资源：https://github.com/eProsima/Fast-CDR
 依次执行如下命令：
 ```shell
 cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf Fast-CDR-1.0.24.tar.gz
-cd Fast-CDR-1.0.24/
+tar -xvf Fast-CDR-1.0.7.tar.gz
+cd Fast-CDR-1.0.7/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env ..
 cmake --build . --target install
 
-（8）安装fast-dds
+（7）安装fast-dds
 github资源：https://github.com/eProsima/Fast-DDS
 依次执行如下命令：
 ```shell
 cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf Fast-DDS-2.7.1.tar.gz
-cd Fast-DDS-2.7.1/
+tar -xvf Fast-DDS-1.5.0.tar.gz
+cd Fast-DDS-1.5.0/
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DCMAKE_PREFIX_PATH=/home/shelman/Share/cyber-rt/code/env ..
 cmake --build . --target install
 
-（9）安装cyber-rt
+（8）安装cyber-rt
 ```shell
 cd /home/shelman/Share/cyber-rt/code/env
 source setup.bash
@@ -139,5 +128,29 @@ mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/install -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 cmake --build . --target install
+
+## #3 验证
+
+cd /home/shelman/Share/cyber-rt/code/examples/CyberRTReadWriteTest
+使用qtcreator编译CyberRTReadWriteTest.pro变成后，程序输出到bin文件下
+cd bin
+sudo chmod +x CyberRTReadWriteTest.sh
+
+运行reader
+
+./CyberRTReadWriteTest.sh reader
+
+![example](docs/reader.jpg)
+
+运行writer
+
+./CyberRTReadWriteTest.sh writer
+
+![example](docs/writer.jpg)
+
+
+
+
+
 
 

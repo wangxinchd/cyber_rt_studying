@@ -102,7 +102,7 @@ void UnderlayMessageType::deleteData(void* data) {
   delete (reinterpret_cast<UnderlayMessage*>(data));
 }
 
-bool UnderlayMessageType::getKey(void* data, InstanceHandle_t* handle, bool force_md5) {
+bool UnderlayMessageType::getKey(void* data, InstanceHandle_t* handle) {
   RETURN_VAL_IF((!m_isGetKeyDefined), false);
   UnderlayMessage* p_type = reinterpret_cast<UnderlayMessage*>(data);
   eprosima::fastcdr::FastBuffer fastbuffer(
@@ -114,31 +114,18 @@ bool UnderlayMessageType::getKey(void* data, InstanceHandle_t* handle, bool forc
                                                             // serializes the
                                                             // data.
   p_type->serializeKey(ser);
-  if (force_md5)
-  {
-      m_md5.init();
-      m_md5.update(m_keyBuffer, (unsigned int)ser.getSerializedDataLength());
-      m_md5.finalize();
-      for (uint8_t i = 0; i < 16; ++i) {
-        handle->value[i] = m_md5.digest[i];
-      }
+  if (UnderlayMessage::getKeyMaxCdrSerializedSize() > 16) {
+    m_md5.init();
+    m_md5.update(m_keyBuffer, (unsigned int)ser.getSerializedDataLength());
+    m_md5.finalize();
+    for (uint8_t i = 0; i < 16; ++i) {
+      handle->value[i] = m_md5.digest[i];
+    }
+  } else {
+    for (uint8_t i = 0; i < 16; ++i) {
+      handle->value[i] = m_keyBuffer[i];
+    }
   }
-  else
-  {
-      if (UnderlayMessage::getKeyMaxCdrSerializedSize() > 16) {
-        m_md5.init();
-        m_md5.update(m_keyBuffer, (unsigned int)ser.getSerializedDataLength());
-        m_md5.finalize();
-        for (uint8_t i = 0; i < 16; ++i) {
-          handle->value[i] = m_md5.digest[i];
-        }
-      } else {
-        for (uint8_t i = 0; i < 16; ++i) {
-          handle->value[i] = m_keyBuffer[i];
-        }
-      }
-  }
-
   return true;
 }
 
