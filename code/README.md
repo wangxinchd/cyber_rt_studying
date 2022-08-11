@@ -139,14 +139,14 @@ sudo chmod +x CyberRTReadWriteTest.sh
 运行reader
 
 ./CyberRTReadWriteTest.sh reader
-
-![example](docs/reader.jpg)
+```
+![example](docs/reader.png)
 
 运行writer
 
 ./CyberRTReadWriteTest.sh writer
-
-![example](docs/writer.jpg)
+```
+![example](docs/writer.png)
 
 
 
