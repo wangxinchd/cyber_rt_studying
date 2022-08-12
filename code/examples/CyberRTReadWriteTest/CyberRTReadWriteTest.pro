@@ -16,7 +16,7 @@ CONFIG -= qt
 #################################################################
 
 LIBS += -L"$$PWD/../../../install/lib" -lcyber -lcommon_component_example
-LIBS += -L"$$PWD/../../env/lib" -lfastcdr -lfastrtps \
+LIBS += -L"$$PWD/../../env/lib" -lfastcdr -lfastrtps -lfoonathan_memory-0.7.1 \
                       -lgflags -lgtest -lglog -ltinyxml2 -lprotobuf -lprotobuf-lite -lprotoc
 LIBS += -lpthread
 

@@ -33,8 +33,8 @@ void BussinessWriter::run()
 {
     // create talker
     std::shared_ptr<Writer<BussinessDataInfo> > talker = m_upNodeTalker->CreateWriter<BussinessDataInfo>(CHANNEL);
-    talker->Init();
-    std::cout << "cyber rt state " << apollo::cyber::OK() << std::endl;
+    //talker->Init();
+    //std::cout << "cyber rt state " << apollo::cyber::OK() << std::endl;
     while (apollo::cyber::OK())
     {
         auto msg = std::make_shared<BussinessDataInfo>();

@@ -19,6 +19,7 @@
 #include "cyber/common/log.h"
 #include "cyber/transport/rtps/underlay_message.h"
 #include "cyber/transport/rtps/underlay_message_type.h"
+#include "fastdds/rtps/common/MatchingInfo.h"
 
 namespace apollo {
 namespace cyber {
@@ -38,14 +39,15 @@ void SubscriberListener::onNewDataMessage(eprosima::fastrtps::Subscriber* sub) {
   std::lock_guard<std::mutex> lock(mutex_);
   eprosima::fastrtps::SampleInfo_t m_info;
   cyber::transport::UnderlayMessage m;
+
   RETURN_IF(!sub->takeNextData(reinterpret_cast<void*>(&m), &m_info));
-  RETURN_IF(m_info.sampleKind != eprosima::fastrtps::ALIVE);
+  RETURN_IF(m_info.sampleKind != eprosima::fastrtps::rtps::ALIVE);
   callback_(m.data());
 }
 
 void SubscriberListener::onSubscriptionMatched(
     eprosima::fastrtps::Subscriber* sub,
-    eprosima::fastrtps::MatchingInfo& info) {
+    eprosima::fastrtps::rtps::MatchingInfo& info) {
   (void)sub;
   (void)info;
 }

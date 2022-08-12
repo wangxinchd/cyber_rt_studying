@@ -30,6 +30,7 @@
 #include "fastrtps/subscriber/SampleInfo.h"
 #include "fastrtps/subscriber/Subscriber.h"
 #include "fastrtps/subscriber/SubscriberListener.h"
+#include "fastdds/rtps/common/MatchingInfo.h"
 
 namespace apollo {
 namespace cyber {
@@ -49,7 +50,7 @@ class SubListener : public eprosima::fastrtps::SubscriberListener {
 
   void onNewDataMessage(eprosima::fastrtps::Subscriber* sub);
   void onSubscriptionMatched(eprosima::fastrtps::Subscriber* sub,
-                             eprosima::fastrtps::MatchingInfo& info);  // NOLINT
+                             eprosima::fastrtps::rtps::MatchingInfo& info);  // NOLINT
 
  private:
   NewMsgCallback callback_;

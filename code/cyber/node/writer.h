@@ -127,6 +127,7 @@ bool Writer<MessageT>::Init() {
     if (init_) {
       return true;
     }
+
     transmitter_ =
         transport::Transport::Instance()->CreateTransmitter<MessageT>(
             role_attr_);

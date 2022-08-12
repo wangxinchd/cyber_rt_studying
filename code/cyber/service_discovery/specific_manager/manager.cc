@@ -54,7 +54,6 @@ bool Manager::StartDiscovery(RtpsParticipant* participant) {
   if (is_discovery_started_.exchange(true)) {
     return true;
   }
-
   if (!CreatePublisher(participant) || !CreateSubscriber(participant)) {
     AERROR << "create publisher or subscriber failed.";
     StopDiscovery();
@@ -155,7 +154,6 @@ bool Manager::CreateSubscriber(RtpsParticipant* participant) {
       !AttributesFiller::FillInSubAttr(
           channel_name_, QosProfileConf::QOS_PROFILE_TOPO_CHANGE, &sub_attr),
       false);
-
   listener_ = new SubscriberListener(
       std::bind(&Manager::OnRemoteChange, this, std::placeholders::_1));
 
@@ -194,10 +192,15 @@ void Manager::OnRemoteChange(const std::string& msg_str) {
   }
 
   ChangeMsg msg;
+  // fixed the problem by shelman
   //RETURN_IF(!message::ParseFromString(msg_str, &msg));
   if (message::HasParseFromString<ChangeMsg>::value) {
-    msg.ParseFromString(msg_str);
-  } else {
+    if (!(msg.ParseFromString(msg_str)))
+    {
+      AWARN << "ChangeMsg call ParseFromString return false.";
+      return;
+    }
+  }else {
     AWARN << "HasParseFromString<ChangeMsg> is not met.";
     return;
   }
@@ -207,6 +210,7 @@ void Manager::OnRemoteChange(const std::string& msg_str) {
   }
   RETURN_IF(!Check(msg.role_attr()));
   Dispose(msg);
+  return;
 }
 
 bool Manager::Publish(const ChangeMsg& msg) {
