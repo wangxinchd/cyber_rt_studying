@@ -1,155 +1,34 @@
 # Apollo(v7.0.0) Cyber 
+基本编译参考：https://gitee.com/langxm2006/cyber-rt
+该项目整个编译整理的比较详细，我主要是采用镜像和脚本封装了一层，并解决了我在操作中遇到的问题
 
-## #1 env
+## #1 编译环境
 
 ```shell
-Ubuntu18.04
+Ubuntu20.04
 ```
-Terminal
+采用下面的命令得到一个docker 镜像，所有的编译以及验证流程都是在镜像对应的容器中完成的
 ```shell
-sudo apt-get install build-essential -y
-
-sudo apt install glibc-doc manpages-posix-dev -y
-
-sudo apt install git wget openssl libasio-dev libssl-dev -y
-
-sudo apt install libp11-dev libengine-pkcs11 softhsm2 libpoco-dev uuid-dev libncurses5-dev autoconf automake libtool -y
-
-sudo apt install mesa-common-dev -y
-
-sudo apt install libgl1-mesa-dev libglu1-mesa-dev -y
-```
-
-以及安装cmake，需要高版本的cmake，请参考：
-https://blog.csdn.net/qysh123/article/details/108091590
-https://blog.csdn.net/e3399/article/details/106135560
-```shell
-sudo apt install cmake-qt-gui -y
+docker build -f ./DockerFile -t cyber_rt_build:0.1 .
 ```
 
 
 ## #2 build and install
-
-1. download
-
-```shell
-git clone https://gitee.com/langxm2006/cyber-rt.git
-cd cyber-rt
+```bash
+git clone 项目.git # 克隆项目
+docker run -v [项目全局路径]:[项目全局路径] -it  cyber_rt_build:0.1 /bin/bash # 创建容器
+cd [项目全局路径]
+./auto_build.sh # 开始编译
 ```
 
-2. build and install 
 
-（1）安装tinyxml2
-github资源：https://github.com/leethomason/tinyxml2
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf tinyxml2-6.0.0.tar.gz
-cd tinyxml2-6.0.0/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
-cmake --build . --target install
-```
-（2）安装gflags
-github资源：https://github.com/gflags/gflags
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf gflags-2.2.2.tar.gz
-cd gflags-2.2.2/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
-cmake --build . --target install
-```
-（3）安装gtest
-github资源：https://github.com/google/googletest
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf googletest-release-1.12.1.tar.gz
-cd googletest-release-1.12.1/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
-cmake --build . --target install
-```
-（4）安装glog
-github资源：https://github.com/google/glog
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf glog-0.6.0.tar.gz
-cd glog-0.6.0/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
-cmake --build . --target install
-```
-（5）安装protobuf
-github资源：https://github.com/protocolbuffers/protobuf
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf protobuf-3.14.0.tar.gz
-cd protobuf-3.14.0/
-./autogen.sh
-./configure --prefix=/home/shelman/Share/cyber-rt/code/env CFLAGS="-fPIC" CXXFLAGS="-fPIC"
-make
-make install
-```
-（6）安装foonathan_memory_vendor
-github资源：https://github.com/eProsima/foonathan_memory_vendor
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf foonathan_memory_vendor-1.2.1.tar.gz
-cd foonathan_memory_vendor-1.2.1/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DBUILD_SHARED_LIBS=ON ..
-cmake --build . --target install
-```
-（7）安装fast-cdr
-github资源：https://github.com/eProsima/Fast-CDR
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf Fast-CDR-1.0.24.tar.gz
-cd Fast-CDR-1.0.24/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env ..
-cmake --build . --target install
-```
-（8）安装fast-dds
-github资源：https://github.com/eProsima/Fast-DDS
-依次执行如下命令：
-```shell
-cd /home/shelman/Share/cyber-rt/code/third_party
-tar -xvf Fast-DDS-2.7.1.tar.gz
-cd Fast-DDS-2.7.1/
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/code/env -DCMAKE_PREFIX_PATH=/home/shelman/Share/cyber-rt/code/env ..
-cmake --build . --target install
-```
-（9）安装cyber-rt
-```shell
-cd /home/shelman/Share/cyber-rt/code/env
-source setup.bash
-cd /home/shelman/Share/cyber-rt/code
-env/bin/protoc -I=cyber/proto/ --cpp_out=cyber/proto cyber/proto/*.proto
-env/bin/protoc -I=cyber/examples/proto/ --cpp_out=cyber/examples/proto cyber/examples/proto/*.proto
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/home/shelman/Share/cyber-rt/install -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-cmake --build . --target install
-```
 ## #3 验证
 
 ```shell
-cd /home/shelman/Share/cyber-rt/code/examples/CyberRTReadWriteTest
-```
-使用qtcreator编译CyberRTReadWriteTest.pro变成后，程序输出到bin文件下
-```shell
-cd bin
+cd code/examples/CyberRTReadWriteTest/bin
 sudo chmod +x CyberRTReadWriteTest.sh
 ```
+
 运行reader
 ```shell
 ./CyberRTReadWriteTest.sh reader
