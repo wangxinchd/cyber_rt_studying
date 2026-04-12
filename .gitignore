@@ -20,3 +20,5 @@ install/lib/
 install/setup.bash
 install/setup.zsh
 install/share/
+
+*.log
