@@ -117,6 +117,8 @@ HybridTransmitter<M>::~HybridTransmitter() {
 
 template <typename M>
 void HybridTransmitter<M>::Enable() {
+  AINFO << "transmitter type(HybridTransmitter) enable.";
+
   std::lock_guard<std::mutex> lock(mutex_);
   for (auto& item : transmitters_) {
     item.second->Enable();
@@ -125,6 +127,8 @@ void HybridTransmitter<M>::Enable() {
 
 template <typename M>
 void HybridTransmitter<M>::Disable() {
+  AINFO << "transmitter type(HybridTransmitter) disable.";
+
   std::lock_guard<std::mutex> lock(mutex_);
   for (auto& item : transmitters_) {
     item.second->Disable();
@@ -133,6 +137,8 @@ void HybridTransmitter<M>::Disable() {
 
 template <typename M>
 void HybridTransmitter<M>::Enable(const RoleAttributes& opposite_attr) {
+  AINFO << "transmitter type(HybridTransmitter) enable.";
+
   auto relation = GetRelation(opposite_attr);
   if (relation == NO_RELATION) {
     return;
@@ -147,6 +153,8 @@ void HybridTransmitter<M>::Enable(const RoleAttributes& opposite_attr) {
 
 template <typename M>
 void HybridTransmitter<M>::Disable(const RoleAttributes& opposite_attr) {
+  AINFO << "transmitter type(HybridTransmitter) disable.";
+
   auto relation = GetRelation(opposite_attr);
   if (relation == NO_RELATION) {
     return;

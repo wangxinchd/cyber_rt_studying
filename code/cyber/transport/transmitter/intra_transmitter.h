@@ -59,6 +59,7 @@ IntraTransmitter<M>::~IntraTransmitter() {
 
 template <typename M>
 void IntraTransmitter<M>::Enable() {
+  AINFO << "transmitter type(IntraTransmitter) enable.";
   if (!this->enabled_) {
     dispatcher_ = IntraDispatcher::Instance();
     this->enabled_ = true;
@@ -67,6 +68,8 @@ void IntraTransmitter<M>::Enable() {
 
 template <typename M>
 void IntraTransmitter<M>::Disable() {
+  AINFO << "transmitter type(IntraTransmitter) disable.";
+
   if (this->enabled_) {
     dispatcher_ = nullptr;
     this->enabled_ = false;

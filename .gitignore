@@ -22,3 +22,5 @@ install/setup.zsh
 install/share/
 
 *.log
+*.INFO
+*.log.INFO*

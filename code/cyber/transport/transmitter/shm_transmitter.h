@@ -73,6 +73,8 @@ ShmTransmitter<M>::~ShmTransmitter() {
 
 template <typename M>
 void ShmTransmitter<M>::Enable() {
+  AINFO << "transmitter type(ShmTransmitter) enable.";
+
   if (this->enabled_) {
     return;
   }
@@ -84,6 +86,8 @@ void ShmTransmitter<M>::Enable() {
 
 template <typename M>
 void ShmTransmitter<M>::Disable() {
+  AINFO << "transmitter type(ShmTransmitter) disable.";
+
   if (this->enabled_) {
     segment_ = nullptr;
     notifier_ = nullptr;

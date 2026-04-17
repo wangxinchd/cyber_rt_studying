@@ -106,6 +106,8 @@ add_subdirectory(cyber/examples)
 #add_subdirectory(cyber/python)
 add_subdirectory(cyber/tools)
 
+add_subdirectory(examples)
+
 # --------------------------------------------------------------
 #                      CPack
 # --------------------------------------------------------------
@@ -219,10 +221,10 @@ install(DIRECTORY ${CMAKE_BINARY_DIR}/share/conf/
 )
 
 # setup.zsh 
-file(COPY setup.zsh setup.bash 
+file(COPY setup.zsh setup.bash start_env.sh
   DESTINATION ${CMAKE_BINARY_DIR}
 )
-install(FILES ${CMAKE_BINARY_DIR}/setup.zsh ${CMAKE_BINARY_DIR}/setup.bash
+install(FILES ${CMAKE_BINARY_DIR}/setup.zsh ${CMAKE_BINARY_DIR}/setup.bash ${CMAKE_BINARY_DIR}/start_env.sh
   DESTINATION . 
 )
 

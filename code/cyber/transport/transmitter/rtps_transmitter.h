@@ -67,6 +67,7 @@ RtpsTransmitter<M>::~RtpsTransmitter() {
 
 template <typename M>
 void RtpsTransmitter<M>::Enable() {
+  ADEBUG << "transmitter type(RtpsTransmitter) enable.";
   if (this->enabled_) {
     return;
   }
@@ -84,6 +85,8 @@ void RtpsTransmitter<M>::Enable() {
 
 template <typename M>
 void RtpsTransmitter<M>::Disable() {
+  AINFO << "transmitter type(RtpsTransmitter) disable.";
+
   if (this->enabled_) {
     publisher_ = nullptr;
     this->enabled_ = false;
@@ -99,7 +102,7 @@ bool RtpsTransmitter<M>::Transmit(const MessagePtr& msg,
 template <typename M>
 bool RtpsTransmitter<M>::Transmit(const M& msg, const MessageInfo& msg_info) {
   if (!this->enabled_) {
-    ADEBUG << "not enable.";
+    AINFO << "not enable.";
     return false;
   }
 
