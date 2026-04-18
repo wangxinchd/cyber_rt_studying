@@ -80,7 +80,7 @@ template <typename M>
 bool IntraTransmitter<M>::Transmit(const MessagePtr& msg,
                                    const MessageInfo& msg_info) {
   if (!this->enabled_) {
-    ADEBUG << "not enable.";
+    AINFO << "IntraTransmitter not enable.";
     return false;
   }
 

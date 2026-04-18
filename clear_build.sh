@@ -17,3 +17,6 @@ rm -rf ${curr_path}/code/third_party/protobuf-3.14.0
 rm -rf ${curr_path}/code/third_party/tinyxml2-6.0.0
 rm -rf ${curr_path}/code/third_party/Fast-CDR-1.0.24
 rm -rf ${curr_path}/code/third_party/Fast-DDS-2.7.1
+
+rm cyber_monitor.INFO
+rm cyber_monitor.log.INFO.*

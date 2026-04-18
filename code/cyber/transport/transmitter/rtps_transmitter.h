@@ -102,7 +102,7 @@ bool RtpsTransmitter<M>::Transmit(const MessagePtr& msg,
 template <typename M>
 bool RtpsTransmitter<M>::Transmit(const M& msg, const MessageInfo& msg_info) {
   if (!this->enabled_) {
-    AINFO << "not enable.";
+    AINFO << "RtpsTransmitter not enable.";
     return false;
   }
 

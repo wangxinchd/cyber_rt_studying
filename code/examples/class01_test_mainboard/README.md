@@ -29,3 +29,50 @@
 
 # 查看进程:
 # ps aux | grep mainboard
+
+
+# GDB 调试
+
+## start_reader_writer.sh  启动
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "g++ build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/install/bin/mainboard",
+            "args": [
+                "-d",
+                "${workspaceFolder}/install/examples/class01_test_mainboard/dag/test_writer.dag",
+                "-d",
+                "${workspaceFolder}/install/examples/class01_test_mainboard/dag/test_reader.dag"
+            ],
+            "stopAtEntry": false,
+            "sourceFileMap": {
+                "/proc/self/cwd": "${workspaceFolder}"
+            },
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/install/lib:${workspaceFolder}/code/env/lib:"
+                },
+                {
+                    "name": "CYBER_PATH",
+                    "value": "${workspaceFolder}/install/examples/class01_test_mainboard/"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                },
+            ],
+            "miDebuggerPath": "/usr/bin/gdb",
+        }
+    ]
+}
+```

@@ -20,7 +20,7 @@ install/lib/
 install/setup.bash
 install/setup.zsh
 install/share/
-
+install/examples
 *.log
 *.INFO
 *.log.INFO*
