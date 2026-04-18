@@ -1,0 +1,10 @@
+module_config {
+    module_library : "lib/libtest_planning.so"
+    timer_components {
+        class_name : "apollo::cyber::examples::PlanningComponent"
+        config {
+            name : "planning"
+            interval : 1000
+        }
+    }
+}

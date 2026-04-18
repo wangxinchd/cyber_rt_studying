@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package apollo.cyber.examples.proto;
+
+message SimplePlanning {
+  optional uint64 timestamp = 1;
+  optional uint64 seq = 2;
+  optional double x = 3;
+  optional double y = 4;
+  optional double heading = 5;
+  optional double speed = 6;
+};
+
+message SimpleLocalization {
+  optional uint64 timestamp = 1;
+  optional uint64 seq = 2;
+  optional double x = 3;
+  optional double y = 4;
+  optional double z = 5;
+  optional double heading = 6;
+};

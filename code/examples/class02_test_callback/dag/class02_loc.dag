@@ -1,0 +1,11 @@
+module_config {
+    module_library : "lib/libtest_loc.so"
+    timer_components {
+        class_name : "apollo::cyber::examples::LocComponent"
+        config {
+            name : "loc"
+            interval : 1000
+        }
+    }
+}
+

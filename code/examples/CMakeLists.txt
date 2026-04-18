@@ -1,3 +1,4 @@
 
 
 add_subdirectory(class01_test_mainboard)
+add_subdirectory(class02_test_callback)
