@@ -257,6 +257,22 @@ std::string GlobalData::GetTaskNameById(uint64_t id) {
   return kEmptyString;
 }
 
+bool GlobalData::RegisterComponent(const std::string &node_name,
+                                   const std::shared_ptr<void> &component_ptr) {
+  if (node_name.empty() || !component_ptr) {
+    AERROR << "register Component error: " << node_name;
+    return false;
+  }
+  WriteLockGuard<AtomicRWLock> lock(component_map_lock_);
+  auto it = node_component_map_.find(node_name);
+  if (it != node_component_map_.end()) {
+    return false;
+  }
+  node_component_map_[node_name] = component_ptr;
+  AINFO << "register component: " << node_name;
+  return true;
+}
+
 }  // namespace common
 }  // namespace cyber
 }  // namespace apollo

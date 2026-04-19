@@ -97,6 +97,9 @@ bool ModuleController::LoadModule(const DagConfig& dag_config) {
       if (base == nullptr || !base->Initialize(component.config())) {
         return false;
       }
+
+      const std::string& node_name = component.config().name();
+      common::GlobalData::Instance()->RegisterComponent(node_name, base);
       component_list_.emplace_back(std::move(base));
     }
 
@@ -107,6 +110,9 @@ bool ModuleController::LoadModule(const DagConfig& dag_config) {
       if (base == nullptr || !base->Initialize(component.config())) {
         return false;
       }
+
+      const std::string &node_name = component.config().name();
+      common::GlobalData::Instance()->RegisterComponent(node_name, base);
       component_list_.emplace_back(std::move(base));
     }
   }

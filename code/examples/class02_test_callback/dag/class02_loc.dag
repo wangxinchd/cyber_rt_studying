@@ -3,7 +3,7 @@ module_config {
     timer_components {
         class_name : "LocComponent"
         config {
-            name : "loc"
+            name : "LocComponent"
             interval : 1000
         }
     }
