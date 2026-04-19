@@ -21,7 +21,3 @@ bool ReaderComponent::Proc(const std::shared_ptr<Chatter>& msg) {
 }  // namespace examples
 }  // namespace cyber
 }  // namespace apollo
-
-#include "cyber/class_loader/class_loader.h"
-
-CYBER_REGISTER_COMPONENT(apollo::cyber::examples::ReaderComponent);

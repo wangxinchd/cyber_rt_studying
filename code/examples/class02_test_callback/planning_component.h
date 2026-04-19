@@ -33,6 +33,7 @@ class PlanningComponent : public TimerComponent {
   uint64_t seq_ = 0;
   uint64_t recv_count_ = 0;
 };
+CYBER_REGISTER_COMPONENT(PlanningComponent)
 
 }  // namespace examples
 }  // namespace cyber

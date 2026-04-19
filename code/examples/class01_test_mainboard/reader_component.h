@@ -26,6 +26,7 @@ class ReaderComponent : public Component<Chatter> {
   std::shared_ptr<Reader<Chatter>> reader_;
   uint64_t recv_count_ = 0;
 };
+CYBER_REGISTER_COMPONENT(ReaderComponent)
 
 }  // namespace examples
 }  // namespace cyber

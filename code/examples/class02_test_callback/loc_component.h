@@ -32,6 +32,7 @@ class LocComponent : public TimerComponent {
   std::shared_ptr<Writer<SimpleLocalization>> localization_writer_;
   uint64_t recv_count_ = 0;
 };
+CYBER_REGISTER_COMPONENT(LocComponent)
 
 }  // namespace examples
 }  // namespace cyber

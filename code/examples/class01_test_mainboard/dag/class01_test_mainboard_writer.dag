@@ -7,7 +7,7 @@
 module_config {
     module_library : "/mnt/sd_data/git_project/sim_plan/sim_plan/cyber_rt_studying/install/lib/libtest_writer.so"
     timer_components {
-        class_name : "apollo::cyber::examples::WriterComponent"
+        class_name : "WriterComponent"
         config {
             name : "planning"
             interval : 100  # 100ms 发送一次

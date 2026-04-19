@@ -7,7 +7,7 @@
 module_config {
     module_library : "/mnt/sd_data/git_project/sim_plan/sim_plan/cyber_rt_studying/install/lib/libtest_reader.so"
     components {
-        class_name : "apollo::cyber::examples::ReaderComponent"
+        class_name : "ReaderComponent"
         config {
             name : "loc"
             readers {

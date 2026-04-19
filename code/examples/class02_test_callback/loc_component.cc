@@ -46,7 +46,3 @@ void LocComponent::OnPlanning(const std::shared_ptr<SimplePlanning>& msg) {
 }  // namespace examples
 }  // namespace cyber
 }  // namespace apollo
-
-#include "cyber/class_loader/class_loader.h"
-
-CYBER_REGISTER_COMPONENT(apollo::cyber::examples::LocComponent);

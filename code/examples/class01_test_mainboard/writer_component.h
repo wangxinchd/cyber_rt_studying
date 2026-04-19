@@ -27,6 +27,7 @@ class WriterComponent : public TimerComponent {
   std::shared_ptr<Writer<Chatter>> writer_;
   uint64_t seq_ = 0;
 };
+CYBER_REGISTER_COMPONENT(WriterComponent)
 
 }  // namespace examples
 }  // namespace cyber
