@@ -9,6 +9,8 @@ message SimplePlanning {
   optional double y = 4;
   optional double heading = 5;
   optional double speed = 6;
+  optional uint64 localization_timestamp = 7;
+  optional uint64 localization_seq = 8;
 };
 
 message SimpleLocalization {

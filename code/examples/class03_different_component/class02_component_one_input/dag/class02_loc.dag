@@ -1,0 +1,10 @@
+module_config {
+    module_library : "./lib/libtest_class02_loc.so"
+    timer_components {
+        class_name : "LocComponent"
+        config {
+            name : "loc"
+            interval : 10
+        }
+    }
+}

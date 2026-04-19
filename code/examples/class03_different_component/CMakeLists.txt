@@ -1,0 +1,2 @@
+# add_subdirectory(class01_empty_component)
+add_subdirectory(class02_component_one_input)
