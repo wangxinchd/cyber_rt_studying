@@ -21,13 +21,17 @@ install(TARGETS class01_test_mainboard_reader class01_test_mainboard_writer
     RUNTIME DESTINATION ${INSTALL_PATH}/examples/class01_test_mainboard/bin
 )
 
-install(FILES dag/class01_test_mainboard_reader.dag dag/class01_test_mainboard_writer.dag
+file(GLOB DAG_FILES "dag/*.dag")
+install(FILES ${DAG_FILES}
   DESTINATION ${INSTALL_PATH}/examples/class01_test_mainboard/dag
 )
+
 install(FILES conf/cyber.pb.conf
   DESTINATION ${INSTALL_PATH}/examples/class01_test_mainboard/conf
 )
-install(FILES scripts/start_class01_test_mainboard_reader_component.sh scripts/start_class01_test_mainboard_writer_component.sh scripts/start_class01_test_mainboard_reader_writer.sh
+
+file(GLOB SCRIPT_FILES "scripts/*.sh")
+install(FILES ${SCRIPT_FILES}
   DESTINATION ${INSTALL_PATH}/examples/class01_test_mainboard/scripts
   PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
               GROUP_EXECUTE GROUP_READ

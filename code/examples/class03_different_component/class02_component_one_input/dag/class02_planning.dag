@@ -1,0 +1,12 @@
+module_config {
+    module_library : "./lib/libtest_class02_planning.so"
+    components {
+        class_name : "PlanningComponent"
+        config {
+            name : "planning"
+            readers {
+                channel : "channel/localization"
+            }
+        }
+    }
+}

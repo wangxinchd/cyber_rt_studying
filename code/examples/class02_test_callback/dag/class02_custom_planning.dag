@@ -1,0 +1,9 @@
+module_config {
+    module_library : "lib/libtest_custom_planning.so"
+    components {
+        class_name : "CustomPlanningComponent"
+        config {
+            name : "custom_planning"
+        }
+    }
+}

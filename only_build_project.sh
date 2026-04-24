@@ -25,7 +25,7 @@ if [ $# -ge 1 ]; then
 fi
 
 cd "${curr_path}/code/env"
-source setup.bash
+source "${curr_path}/code/setup.bash"
 
 echo " ========== start printf env ========== "
 echo "PATH: $PATH"

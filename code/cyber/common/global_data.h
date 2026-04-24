@@ -36,6 +36,9 @@ using ::apollo::cyber::base::AtomicHashMap;
 using ::apollo::cyber::proto::ClockMode;
 using ::apollo::cyber::proto::CyberConfig;
 using ::apollo::cyber::proto::RunMode;
+using ::apollo::cyber::base::AtomicRWLock;
+using ::apollo::cyber::base::ReadLockGuard;
+using ::apollo::cyber::base::WriteLockGuard;
 
 class GlobalData {
  public:
@@ -80,6 +83,28 @@ class GlobalData {
   static uint64_t RegisterTaskName(const std::string& task_name);
   static std::string GetTaskNameById(uint64_t id);
 
+  bool RegisterComponent(const std::string& node_name, const std::shared_ptr<void>& component_ptr);
+  template<typename T>
+  std::shared_ptr<T> GetComponentAs(const std::string& node_name) {
+    if (node_name.empty()) {
+      return nullptr;
+    }
+    ReadLockGuard<AtomicRWLock> lock(component_map_lock_);
+    auto it = node_component_map_.find(node_name);
+    if (it != node_component_map_.end()) {
+      return std::static_pointer_cast<T>(it->second);
+    }
+    else {
+      AERROR<< "no component of " << node_name;
+      return nullptr;
+    }
+  }
+
+  void ClearComponent() {
+    ReadLockGuard<AtomicRWLock> lock(component_map_lock_);
+    node_component_map_.clear();
+  }
+
  private:
   void InitHostInfo();
   bool InitConfig();
@@ -103,11 +128,13 @@ class GlobalData {
   // run mode
   RunMode run_mode_;
   ClockMode clock_mode_;
+  AtomicRWLock component_map_lock_{true};
 
   static AtomicHashMap<uint64_t, std::string, 512> node_id_map_;
   static AtomicHashMap<uint64_t, std::string, 256> channel_id_map_;
   static AtomicHashMap<uint64_t, std::string, 256> service_id_map_;
   static AtomicHashMap<uint64_t, std::string, 256> task_id_map_;
+  std::unordered_map<std::string, std::shared_ptr<void>> node_component_map_;
 
   DECLARE_SINGLETON(GlobalData)
 };

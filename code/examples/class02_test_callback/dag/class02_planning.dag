@@ -3,7 +3,7 @@ module_config {
     timer_components {
         class_name : "PlanningComponent"
         config {
-            name : "planning"
+            name : "PlanningComponent"
             interval : 1000
         }
     }

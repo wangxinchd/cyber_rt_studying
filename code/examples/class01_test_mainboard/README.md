@@ -1,11 +1,9 @@
 # 用于测试这个问题：
 
 如果有两个节点planning.so 和 loc.so 这两个节点分别通过 mainborad 在同一个机器上面拉起来，是两个进程，按照cyber rt 规定采用共享内存通讯。
-如果通过 mainboard 一次性拉起 planning.so  和 loc.so，此时是 一个进程中，是采用共享内存 还是指针copy呢
+如果通过 mainboard 一次性拉起 planning.so  和 loc.so，此时是 一个进程中，通过配置可以设定采用共享内存还是指针通讯
 
 # 编译命令 (CMake)
-
-
 # 运行命令
 ## 方式1: 同一个进程中 mainboard 拉起两个节点
 ./install/examples/class01_test_mainboard/scripts/start_reader_writer.sh 
