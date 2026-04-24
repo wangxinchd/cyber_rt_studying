@@ -59,13 +59,17 @@ install(TARGETS test_class02_planning test_class02_loc
     RUNTIME DESTINATION ${INSTALL_PATH}/examples/class03_different_component/class02_component_one_input/bin
 )
 
-install(FILES dag/class02_planning.dag dag/class02_loc.dag
+file(GLOB DAG_FILES "dag/*.dag")
+install(FILES ${DAG_FILES}
   DESTINATION ${INSTALL_PATH}/examples/class03_different_component/class02_component_one_input/dag
 )
+
 install(FILES conf/cyber.pb.conf
   DESTINATION ${INSTALL_PATH}/examples/class03_different_component/class02_component_one_input/conf
 )
-install(FILES scripts/start_class02_planning_component.sh scripts/start_class02_loc_component.sh scripts/start_class02_planning_loc.sh
+
+file(GLOB SCRIPT_FILES "scripts/*.sh")
+install(FILES ${SCRIPT_FILES}
   DESTINATION ${INSTALL_PATH}/examples/class03_different_component/class02_component_one_input/scripts
   PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
               GROUP_EXECUTE GROUP_READ
