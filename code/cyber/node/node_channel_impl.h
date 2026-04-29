@@ -66,6 +66,7 @@ struct ReaderConfig {  ///< configurations for a Reader
  */
 class NodeChannelImpl {
   friend class Node;
+  friend class NodeWrapper;
 
  public:
   using NodeManagerPtr = std::shared_ptr<service_discovery::NodeManager>;

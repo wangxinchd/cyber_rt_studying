@@ -48,6 +48,7 @@ class Node {
   template <typename M0, typename M1, typename M2, typename M3>
   friend class ComponentWrapper;
   friend class TimerComponent;
+  friend class NodeWrapper;
   friend bool Init(const char*);
   friend std::unique_ptr<Node> CreateNode(const std::string&,
                                           const std::string&);
@@ -173,8 +174,8 @@ class Node {
   auto GetReader(const std::string& channel_name)
       -> std::shared_ptr<Reader<MessageT>>;
 
- private:
-  explicit Node(const std::string& node_name,
+ protected:
+  Node(const std::string& node_name,
                 const std::string& name_space = "");
 
   std::string node_name_;

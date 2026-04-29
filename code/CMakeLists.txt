@@ -205,12 +205,12 @@ install(EXPORT ${TARGET_NAME}-targets
   DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/${TARGET_NAME}"
 )
 
-# cyber .h files 
-install(DIRECTORY cyber/
-    DESTINATION include/cyber/
-    FILES_MATCHING
-    PATTERN "*.h"
-)
+# # cyber .h files 
+# install(DIRECTORY cyber/
+#     DESTINATION include/cyber/
+#     FILES_MATCHING
+#     PATTERN "*.h"
+# )
 
 # apollo conf 
 file(COPY cyber/conf/
